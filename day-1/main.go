@@ -11,8 +11,20 @@ import (
 )
 
 func main() {
+	score := findTotalScore("input.txt")
+	fmt.Printf("Total Score: %d\n", score)
+}
+
+func abs(x int) int {
+	if x < 0 {
+		return -x
+	}
+	return x
+}
+
+func findTotalScore(name string) int {
 	// Open the file
-	file, err := os.Open("input.txt")
+	file, err := os.Open(name)
 	if err != nil {
 		log.Fatalf("failed to read the file: %v", err)
 	}
@@ -49,12 +61,6 @@ func main() {
 		totalDistance += distance
 	}
 
-	fmt.Println(totalDistance)
-}
+	return totalDistance
 
-func abs(x int) int {
-	if x < 0 {
-		return -x
-	}
-	return x
 }
