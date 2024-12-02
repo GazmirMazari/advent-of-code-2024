@@ -22,7 +22,6 @@ func main() {
 	var leftList []int
 	var rightList []int
 
-	// Read the file line by line
 	scanner := bufio.NewScanner(file)
 	for scanner.Scan() {
 		line := scanner.Text()
@@ -50,7 +49,6 @@ func main() {
 		totalDistance += distance
 	}
 
-	// Print the result
 	fmt.Println(totalDistance)
 }
 
