@@ -5,6 +5,7 @@ import (
 	"io"
 	"log"
 	"os"
+	"strconv"
 	"strings"
 	"time"
 )
@@ -28,26 +29,42 @@ func main() {
 	content := string(tst)
 	//split the content into lines
 	lines :=strings.Split(content, "\n")
-
+	unsafe := 0
 	for _, line :=range lines {
 		fields := strings.Fields(line)
 
-        // Convert fields to integers
+    
         numbers := make([]int, 0, len(fields))
         for _, field := range fields {
             num, err := strconv.Atoi(field)
             if err != nil {
-                log.Printf("Error converting field to integer on line %d: %v", lineNumber, err)
+                
                 continue
             }
             numbers = append(numbers, num)
         }
 
+		
+		//check each line if if is safe or not
+		for i:=1; i <len(numbers); i++{
+			diff := abs(numbers[i] - numbers[i-1])
+			if diff <= 1 || diff > 3 {
+				unsafe++
+			}
+		}
 	}
 
+	//substract length of lines here
+	safe := len(lines) - unsafe
+	fmt.Printf("lines being printed are %d", safe)
 	elapsedTime := time.Since(startTime)
 	fmt.Printf("File reading took %s\n", elapsedTime)
 
-	// Optionally, use the data variable
-	fmt.Println(string(tst))
+}
+
+func abs (x int) int {
+	if x < 0 {
+		return -x
+	}
+	return x
 }
