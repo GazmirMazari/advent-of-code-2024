@@ -69,7 +69,7 @@ func main() {
 		for i := 2; i < len(numbers); i++ {
 			windowDiff := numbers[i] - numbers[i-1]
 
-			if windowDiff == 0 || !sameSign(firstTwoPositionWindow, windowDiff) || abs(windowDiff) < 1 || abs(windowDiff) > 3 {
+			if windowDiff == 0 || !sameSign(firstTwoPositionWindow, windowDiff) || abs(windowDiff) <= 1 || abs(windowDiff) > 3 {
 				unsafe++
 				break
 			}
